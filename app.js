@@ -14,6 +14,7 @@ app.use(session({ secret: 'secret', resave: false, saveUninitialized: false }))
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(methodOverride('_method'))
+app.use('/upload', express.static(__dirname + '/upload'))
 app.use(flash())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use((req, res, next) => {
