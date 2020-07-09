@@ -57,5 +57,39 @@ let restController = {
       })
     })
   },
+  getFeeds: (req, res) => {
+    return Restaurant.findAll({
+      limit: 10,
+      raw: true,
+      nest: true,
+      order: [['createdAt', 'DESC']],
+      include: [Category]
+    }).then(restaurants => {
+      Comment.findAll({
+        limit: 10,
+        raw: true,
+        nest: true,
+        order: [['createdAt', 'DESC']],
+        include: [User, Restaurant]
+      }).then(comments => {
+        return res.render('feeds', {
+          restaurants: restaurants,
+          comments: comments
+        })
+      })
+    })
+  },
+  getRestaurantDashBoard: (req, res) => {
+    return Restaurant.findByPk(req.params.id, {
+      include: [
+        Category,
+        { model: Comment, include: [User] }
+      ]
+    }).then(restaurant => {
+      restaurant.increment('viewCounts')
+      res.render('restaurantDashBoard', { restaurant: restaurant.toJSON() })
+    })
+
+  }
 }
 module.exports = restController
