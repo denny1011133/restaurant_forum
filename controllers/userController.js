@@ -51,13 +51,14 @@ const userController = {
   },
   getUser: (req, res) => {
     const id = req.params.id
-    return Comment.findAndCountAll({ where: { UserId: id } }).then(result => {
-      const count = result.count
-      return User.findByPk(id, { include: { model: Comment, include: [Restaurant] } })
-        .then(user => {
-          return res.render('profile', { user: user.toJSON(), count })
-        })
-    })
+    return Comment.findAndCountAll({ where: { UserId: id } })
+      .then(result => {
+        const count = result.count
+        return User.findByPk(id, { include: { model: Comment, include: [Restaurant] } })
+          .then(user => {
+            return res.render('profile', { user: user.toJSON(), count })
+          })
+      })
   },
   editUser: (req, res) => {
     return User.findByPk(req.params.id)

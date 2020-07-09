@@ -9,21 +9,24 @@ module.exports = {
       isAdmin: true,
       name: 'root',
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
+      image: "https://loremflickr.com/cache/resized/65535_49983408601_0ed15c0c02_320_240_nofilter.jpg"
     }, {
       email: 'user1@example.com',
       password: bcrypt.hashSync('12345678', bcrypt.genSaltSync(10), null),
       isAdmin: false,
       name: 'user1',
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
+      image: "https://loremflickr.com/cache/resized/65535_49983408601_0ed15c0c02_320_240_nofilter.jpg"
     }, {
       email: 'user2@example.com',
       password: bcrypt.hashSync('12345678', bcrypt.genSaltSync(10), null),
       isAdmin: false,
       name: 'user2',
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
+      image: "https://loremflickr.com/cache/resized/65535_49983408601_0ed15c0c02_320_240_nofilter.jpg"
     }], {});
     queryInterface.bulkInsert('Categories',
       ['中式料理', '日本料理', '義大利料理', '墨西哥料理', '素食料理', '美式料理', '複合式料理']
