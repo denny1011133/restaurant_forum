@@ -57,7 +57,11 @@ const userController = {
         const count = result.count
         return User.findByPk(id, { include: { model: Comment, include: [Restaurant] } })
           .then(user => {
-            return res.render('profile', { user: user.toJSON(), count })
+            if (Number(id) === req.user.id) {
+              return res.render('profile', { user: user.toJSON(), count })
+            } else {
+              res.redirect('back')
+            }
           })
       })
   },
