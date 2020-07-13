@@ -102,7 +102,7 @@ const userController = {
             name: req.body.name,
             image: user.image
           }).then(() => {
-            req.flash('success_messages', 'User was successfully updated!')
+            req.flash('success_messages', 'User is successfully updated!')
             return res.redirect(`/users/${user.id}`)
           })
         })
