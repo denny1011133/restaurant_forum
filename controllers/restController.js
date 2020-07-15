@@ -29,7 +29,8 @@ let restController = {
         description: r.dataValues.description.substring(0, 50),
         categoryName: r.Category.name,
         isFavorited: req.user.FavoritedRestaurants.map(d => d.id).includes(r.id),
-        isLiked: req.user.LikedRestaurants.map(d => d.id).includes(r.id)
+        isLiked: req.user.LikedRestaurants.map(d => d.id).includes(r.id),
+
       }))
       Category.findAll({
         raw: true,
