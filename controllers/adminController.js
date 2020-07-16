@@ -1,11 +1,5 @@
-const db = require('../models')
-const Restaurant = db.Restaurant
-const Category = db.Category
-const User = db.User
-const fs = require('fs')
-const imgur = require('imgur-node-api')
-const IMGUR_CLIENT_ID = process.env.IMGUR_CLIENT_ID
 const adminService = require('../services/adminService.js')
+
 const adminController = {
   getRestaurants: (req, res) => {
     adminService.getRestaurants(req, res, (data) => {
@@ -65,24 +59,15 @@ const adminController = {
     })
   },
   getUsers: (req, res) => {
-    return User.findAll({ raw: true }).then(users => {
-      return res.render('admin/users', { users })
+    adminService.getUsers(req, res, (data) => {
+      return res.render('admin/users', data)
     })
   },
   putUsers: (req, res) => {
-    return User.findByPk(req.params.id)
-      .then(user => {
-        if (user.isAdmin) {
-          user.update({ isAdmin: false })
-          req.flash('success_messages', "admin is updated to user successfully!")
-        }
-        else {
-          user.update({ isAdmin: true })
-          req.flash('success_messages', "user is updated to admin successfully!")
-        }
-        res.redirect('/admin/users')
-      })
-
+    adminService.putUsers(req, res, (data) => {
+      req.flash('success_messages', data['message'])
+      return res.redirect('/admin/users')
+    })
   }
 }
 
